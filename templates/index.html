@@ -3,7 +3,7 @@
 
 <head>
   <title>chatGPT API</title>
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="../static/css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
@@ -27,7 +27,7 @@
     <input type="text" id="keywords" name="keywords" required />
     <button id="button">입력</button>
 
-    <img src="./image/robot_1.gif" class="model">
+    <img src="../static/image/robot_1.gif" class="model">
 
   </section>
 
@@ -40,7 +40,7 @@
   <div id="loading">
     <img src="https://studentrights.sen.go.kr/images/common/loading.gif">
   </div>
-  <script src="./js/prompt.js"></script>
+  <script src="../static/js/prompt.js"></script>
   <script>
     $(document).ready(function () {
       $('#loading').hide();
@@ -97,17 +97,14 @@
       console.log(messages)
 
       const data = {
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4',
         messages: messages,
       }
 
       $.ajax({
-        url: "https://api.openai.com/v1/chat/completions",
+        url: "/chatgpt",
         method: 'POST',
-        headers: {
-          Authorization: "Bearer " + api_key,
-          'Content-Type': 'application/json',
-        },
+        contentType: 'application/json',
         data: JSON.stringify(data),
       }).then(function (response) {
         $('#loading').hide();
@@ -122,7 +119,7 @@
 
         let pre = document.createElement('div')
         pre.classList.add('result_text')
-        pre.innerHTML = "\n\n" + response.choices[0].message.content
+        pre.innerHTML = "\n\n" + response
 
         result.appendChild(model)
         result.appendChild(worry)
