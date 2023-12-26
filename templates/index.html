@@ -15,9 +15,9 @@
     <div class="prompt_title">
       <span>프롬프트</span>
       <select name="option" id="option">
-        <option value="prompt1">요리사ai</option>
-        <option value="prompt2">헬스트레이너ai</option>
-        <option value="prompt3">의사ai</option>
+        <option value="요리사ai">요리사ai</option>
+        <option value="헬스트레이너ai">헬스트레이너ai</option>
+        <option value="의사ai">의사ai</option>
       </select>
     </div>
     <textarea name="prompt" id="prompt" cols="30" rows="10"></textarea>
@@ -62,13 +62,13 @@
       selected = $("#option option:selected").text()
       if($(this).val() == 'prompt1') {
         $('#prompt').val(prompt[0])
-        $('.model').attr('src','./image/robot_1.gif')
+        $('.model').attr('src','../static/image/robot_1.gif')
       } else if($(this).val() == 'prompt2') {
         $('#prompt').val(prompt[1])
-        $('.model').attr('src','./image/robot_2.gif')
+        $('.model').attr('src','../static/image/robot_2.gif')
       } else {
         $('#prompt').val(prompt[2])
-        $('.model').attr('src','./image/robot_3.gif')
+        $('.model').attr('src','../static/image/robot_3.gif')
       }
     })
 
@@ -89,6 +89,7 @@
     function chatGPT() {
       const content = $('#prompt').val()
       const keywords = document.getElementById('keywords').value
+      const prompt = document.getElementById('option').value
       $('#loading').show();
 
       messages[0].content = content
@@ -98,6 +99,7 @@
 
       const data = {
         model: 'gpt-4',
+        prompt: prompt,
         messages: messages,
       }
 
