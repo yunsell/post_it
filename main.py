@@ -2,8 +2,10 @@ from flask import Flask, render_template, request
 from openai import OpenAI
 import pymysql
 from datetime import datetime
+from config import api_key
 
 app = Flask(__name__)
+api_key = api_key
 
 @app.route('/hello/')
 @app.route('/hello/<name>')
